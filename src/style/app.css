@@ -1,5 +1,18 @@
 /* styles in src/style directory are applied to the whole page */
 
+.Display {
+  margin: 1em;
+}
+
+.App
+{
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  align-items: center;
+  margin: auto;
+}
+
 .topLabel {
   font-weight: bold;
   margin-top: 10px;

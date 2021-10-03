@@ -1,19 +1,20 @@
-<main>
+<main class="App">
   <h1>ABCs with Ashna!!</h1>
 
   <div ng-app= "app">
-<body ng-controller="RenderCtrl" ></body>
+<body ng-controller="RenderCtrl" >
 
-<div>
-  <img width="200" src="/img/images/letters/{{letters[index]}}.jpeg" />
-  <img width="200" src="/img/images/nouns/{{letters[index]}}.jpeg" />
+<div class="Display">
+  <img width="200" ng-disabled="!enabled"  ng-click="currentLetter()" src="data/images/letters/{{letters[index]}}.jpeg" />
+  <img width="200" ng-disabled="!enabled"  ng-click="currentNoun()" src="data/images/nouns/{{letters[index]}}.jpeg" />
 </div>
 <div>
-  <button ng-click="reverse()"> <img width="50" src="/img/images/reverse.png" /></button>
-  <button ng-click="current()"> <img width="50" src="/img/images/question.png" /></button>
-  <button ng-click="forward()"> <img width="50" src="/img/images/forward.png" /></button>
+  <button class="btn" ng-disabled="!enabled" ng-click="reverse()"> <img width="50" src="data/images/left-arrow.svg" /></button>
+  <button class="btn" ng-disabled="!enabled"  ng-click="current()"> <img width="50" src="data/images/question.svg" /></button>
+  <button class="btn" ng-disabled="!enabled"  ng-click="forward()"> <img width="50" src="data/images/right-arrow.svg" /></button>
 </div>
 
+</body>
 </div>
 
 

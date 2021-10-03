@@ -22,7 +22,7 @@ const MODULE_NAME = 'app';
 angular.module(MODULE_NAME, [])
   .directive('app', app)
   .controller('RenderCtrl', ($scope) => {
-
+    $scope.enabled = true;
     $scope.letters = [
       'A',
       'B',
@@ -53,10 +53,10 @@ angular.module(MODULE_NAME, [])
     ];
 
     $scope.getLetterAudio = function(letter) {
-      return new Audio(`/img/audio/letters/${letter}.mp3`);
+      return new Audio(`data/audio/letters/${letter}.mp3`);
     }
     $scope.getNounAudio = function(letter) {
-      return new Audio(`/img/audio/nouns/${letter}.mp3`);
+      return new Audio(`data/audio/nouns/${letter}${letter}.mp3`);
     }
 
     $scope.letterMap = {
@@ -88,9 +88,14 @@ angular.module(MODULE_NAME, [])
       'Z': {letter: $scope.getLetterAudio('Z'), noun: $scope.getNounAudio('Z')},
 
     };
-    $scope.init = true;
-    $scope.index = 0;
 
+    $scope.enableTimer = function(length) {
+      $scope.enabled = false;
+
+      setTimeout(function() { $scope.enabled = true; $scope.$apply(); }, length ? length : 1700);
+    };
+
+    $scope.index = 0;
     $scope.forward = function() {
       if ($scope.index === $scope.letters.length -1) {
         $scope.index= 0;
@@ -98,7 +103,7 @@ angular.module(MODULE_NAME, [])
       else  {
         $scope.index++
       }
-      $scope.playLetter($scope.letters[$scope.index])
+      $scope.playPair($scope.letters[$scope.index])
     }
 
     $scope.reverse = function() {
@@ -108,20 +113,42 @@ angular.module(MODULE_NAME, [])
       else  {
         $scope.index--;
       }
-      $scope.playLetter($scope.letters[$scope.index])
+      $scope.playPair($scope.letters[$scope.index])
     }
 
     $scope.current = function() {
-      $scope.playLetter($scope.letters[$scope.index]);
+      $scope.enableTimer();
+      $scope.playPair($scope.letters[$scope.index]);
     };
 
-    $scope.playLetter = function(letter) {
-        var audioLetter = $scope.letterMap[letter].letter;
-        audioLetter.onended = function() {
-          var audioNoun = $scope.letterMap[letter].noun;
-          audioNoun.play();
+
+    $scope.currentLetter = function() {
+      $scope.enableTimer(1000);
+      const currentLetter = $scope.letters[$scope.index];
+      const audioLetter = $scope.letterMap[currentLetter].letter;
+      audioLetter.onended = function() {
+      audioLetter.onended = null;
+      }
+      audioLetter.play();
+    };
+
+    $scope.currentNoun = function() {
+      $scope.enableTimer();
+      const currentLetter = $scope.letters[$scope.index];
+      const audioNoun = $scope.letterMap[currentLetter].noun;
+      audioNoun.play();
+    };
+
+    $scope.playPair = function(letter) {
+        $scope.enableTimer();
+        const audioLetter1 = $scope.letterMap[letter].letter;
+        const audioNoun1 = $scope.letterMap[letter].noun;
+
+        audioLetter1.onended = function() {
+         audioNoun1.play();
+         audioLetter1.onended = null;
         };
-        audioLetter.play();
+          audioLetter1.play();
     };
 
   });
