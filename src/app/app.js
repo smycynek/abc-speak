@@ -92,7 +92,7 @@ angular.module(MODULE_NAME, [])
     $scope.enableTimer = function(length) {
       $scope.enabled = false;
 
-      setTimeout(function() { $scope.enabled = true; $scope.$apply(); }, length ? length : 1700);
+      setTimeout(function() { $scope.enabled = true; $scope.$apply(); }, length ? length : 1100);
     };
 
     $scope.index = 0;
