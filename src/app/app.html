@@ -1,17 +1,17 @@
 <main class="App">
-  <h1>ABCs with Ashna!!</h1>
-
+  <h1>ABCs with Ashna!</h1>
+<p>Click images or buttons to hear letters and words.</p>
   <div ng-app= "app">
 <body ng-controller="RenderCtrl" >
 
 <div class="Display">
-  <img width="200" ng-disabled="!enabled"  ng-click="currentLetter()" ng-src="data/images/letters/{{letters[index]}}.jpeg" />
-  <img width="200" ng-disabled="!enabled"  ng-click="currentNoun()" ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
+  <img title = "Click for letter" width="200" ng-disabled="!enabled"  ng-click="currentLetter()" ng-src="data/images/letters/{{letters[index]}}.jpeg" />
+  <img title = "Click for word" width="200" ng-disabled="!enabled"  ng-click="currentNoun()" ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
 </div>
 <div>
-  <button class="btn" ng-disabled="!enabled" ng-click="reverse()"> <img width="50" ng-src="data/images/left-arrow.svg" /></button>
-  <button class="btn" ng-disabled="!enabled"  ng-click="current()"> <img width="50" ng-src="data/images/question.svg" /></button>
-  <button class="btn" ng-disabled="!enabled"  ng-click="forward()"> <img width="50" ng-src="data/images/right-arrow.svg" /></button>
+  <button title = "Reverse" class="btn btn-light" ng-disabled="!enabled" ng-click="reverse()"> <img alt = "Reverse" width="50" ng-src="data/images/left-arrow.svg" /></button>
+  <button title = "Current"  class="btn btn-light" ng-disabled="!enabled"  ng-click="current()"> <img alt = "Forward" width="50" ng-src="data/images/question.svg" /></button>
+  <button title = "Forward" class="btn btn-light" ng-disabled="!enabled"  ng-click="forward()"> <img alt = "Current" width="50" ng-src="data/images/right-arrow.svg" /></button>
 </div>
 
 </body>
