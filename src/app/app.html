@@ -5,13 +5,13 @@
 <body ng-controller="RenderCtrl" >
 
 <div class="Display">
-  <img width="200" ng-disabled="!enabled"  ng-click="currentLetter()" ng-src="abcspeak/data/images/letters/{{letters[index]}}.jpeg" />
-  <img width="200" ng-disabled="!enabled"  ng-click="currentNoun()" ng-src="abcspeak/data/images/nouns/{{letters[index]}}.jpeg" />
+  <img width="200" ng-disabled="!enabled"  ng-click="currentLetter()" ng-src="data/images/letters/{{letters[index]}}.jpeg" />
+  <img width="200" ng-disabled="!enabled"  ng-click="currentNoun()" ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
 </div>
 <div>
-  <button class="btn" ng-disabled="!enabled" ng-click="reverse()"> <img width="50" ng-src="abcspeak/data/images/left-arrow.svg" /></button>
-  <button class="btn" ng-disabled="!enabled"  ng-click="current()"> <img width="50" ng-src="abcspeak/data/images/question.svg" /></button>
-  <button class="btn" ng-disabled="!enabled"  ng-click="forward()"> <img width="50" ng-src="abcspeak/data/images/right-arrow.svg" /></button>
+  <button class="btn" ng-disabled="!enabled" ng-click="reverse()"> <img width="50" ng-src="data/images/left-arrow.svg" /></button>
+  <button class="btn" ng-disabled="!enabled"  ng-click="current()"> <img width="50" ng-src="data/images/question.svg" /></button>
+  <button class="btn" ng-disabled="!enabled"  ng-click="forward()"> <img width="50" ng-src="data/images/right-arrow.svg" /></button>
 </div>
 
 </body>
