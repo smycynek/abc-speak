@@ -20,8 +20,19 @@
             width="50" ng-src="data/images/right-arrow.svg" /></button>
       </div>
 
+      <div ng-show=false>
+        <img ng-repeat="letter in letters" ng-src=data/images/nouns/{{letter}}.jpeg>
+        <img ng-repeat="letter in letters" ng-src=data/images/letters/{{letter}}.jpeg>
+      </div>
     </body>
   </div>
+  <details class="About">
+    <summary>&#8505;</summary>
+    ABC Speak, Copyright Steven Mycynek 2021
+    <br />
+    <a href="https://github.com/smycynek/abcspeak">github.com/smycynek/abcspeak</a>
+  </details>
+
 
 
 </main>

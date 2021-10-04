@@ -12,3 +12,15 @@
   align-items: center;
   margin: auto;
 }
+
+.About {
+  margin: 1em;
+  font-size: small;
+}
+
+details > summary {
+  list-style: none;
+}
+details summary::-webkit-details-marker {
+  display:none;
+}

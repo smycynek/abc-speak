@@ -1,6 +1,6 @@
 # ABC Speak
 
-ABC Speak
+Copyright 2021 Steven Mycynek
 
 ## Basics
 
