@@ -6,20 +6,21 @@
     <body ng-controller="RenderCtrl">
 
       <div class="Display">
-        <img title="Click for letter" width="200" ng-disabled="!enabled" ng-click="currentLetter()"
+        <img title="Click for letter" width="200" ng-disabled="!enabled" ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
-        <img title="Click for word" width="200" ng-disabled="!enabled" ng-click="currentNoun()"
+        <img title="Click for word" width="200" ng-disabled="!enabled" ng-click="playCurrentNoun()"
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
         <button title="Reverse" class="btn btn-light" ng-disabled="!enabled" ng-click="reverse()"> <img alt="Reverse"
             width="50" ng-src="data/images/left-arrow.svg" /></button>
-        <button title="Current" class="btn btn-light" ng-disabled="!enabled" ng-click="current()"> <img alt="Forward"
+        <button title="Current" class="btn btn-light" ng-disabled="!enabled" ng-click="playCurrent()"> <img alt="Forward"
             width="50" ng-src="data/images/question.svg" /></button>
         <button title="Forward" class="btn btn-light" ng-disabled="!enabled" ng-click="forward()"> <img alt="Current"
             width="50" ng-src="data/images/right-arrow.svg" /></button>
       </div>
 
+      <!-- Prefetching-->
       <div ng-show=false>
         <img ng-repeat="letter in letters" ng-src=data/images/nouns/{{letter}}.jpeg>
         <img ng-repeat="letter in letters" ng-src=data/images/letters/{{letter}}.jpeg>
@@ -27,7 +28,7 @@
     </body>
   </div>
   <details class="About">
-    <summary>&#8505;</summary>
+    <summary>&#9432;</summary>
     ABC Speak, Copyright Steven Mycynek 2021
     <br />
     <a href="https://github.com/smycynek/abc-speak">github.com/smycynek/abc-speak</a>

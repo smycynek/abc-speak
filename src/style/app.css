@@ -1,11 +1,12 @@
 /* styles in src/style directory are applied to the whole page */
 
 .Display {
-  margin: 0.5em;
+  margin: 0.125em;
 }
 
 .App
 {
+  margin: 0.125em;
   text-align: center;
   align-content: center;
   align-items: center;
@@ -13,14 +14,40 @@
   margin: auto;
 }
 
+h1 {
+  margin: 0;
+  padding:0;
+}
+
+
+p {
+  margin: 0;
+  padding:0;
+}
+
+img {
+  margin: 0;
+  padding:0;
+}
+
+button {
+  margin: 0.0;
+  padding:0.0;
+}
+
 .About {
-  margin: 1em;
+  margin: .25em;
   font-size: small;
 }
 
+details {
+  margin: 0.0;
+  padding: 0.0;
+}
 details > summary {
   list-style: none;
 }
+
 details summary::-webkit-details-marker {
   display:none;
 }

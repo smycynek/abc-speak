@@ -45,10 +45,12 @@ angular.module(MODULE_NAME, [])
         ];
 
         $scope.getLetterAudio = function (letter) {
+            console.log(`Prefetch GET Letter: ${letter}`);
             return new Audio(`data/audio/letters/${letter}.mp3`);
         };
 
         $scope.getNounAudio = function (letter) {
+            console.log(`Prefetch GET Noun: ${letter}`);
             return new Audio(`data/audio/nouns/${letter}${letter}.mp3`);
         };
 
@@ -82,59 +84,77 @@ angular.module(MODULE_NAME, [])
 
         };
 
-        $scope.enableTimer = function (length) {
-            $scope.enabled = false;
-
-            setTimeout(function () { $scope.enabled = true; $scope.$apply(); }, length ? length : 1100);
-        };
 
         $scope.index = 0;
+
+        $scope.getCurrentLetter = function () {
+            const letter =  $scope.letters[$scope.index];
+            console.log(`Current index: ${letter}`);
+            return letter;
+        };
+
         $scope.forward = function () {
+            console.log('Forward');
             if ($scope.index === $scope.letters.length - 1) {
                 $scope.index = 0;
             }
             else {
                 $scope.index++;
             }
-            $scope.playPair($scope.letters[$scope.index]);
+            $scope.playPair($scope.getCurrentLetter());
         };
 
         $scope.reverse = function () {
+            console.log('Reverse');
             if ($scope.index === 0) {
                 $scope.index = $scope.letters.length - 1;
             }
             else {
                 $scope.index--;
             }
-            $scope.playPair($scope.letters[$scope.index]);
+
+            $scope.playPair($scope.getCurrentLetter());
         };
 
-        $scope.current = function () {
-            $scope.enableTimer();
-            $scope.playPair($scope.letters[$scope.index]);
+        $scope.playCurrent = function () {
+            console.log('Play Current Pair');
+            $scope.playPair($scope.getCurrentLetter());
         };
 
-        $scope.currentLetter = function () {
-            $scope.enableTimer(1000);
-            const currentLetter = $scope.letters[$scope.index];
+        $scope.playCurrentLetter = function () {
+            console.log('Play Current Letter');
+            $scope.enabled = false;
+            const currentLetter = $scope.getCurrentLetter();
             const audioLetter = $scope.letterMap[currentLetter].letter;
-            audioLetter.onended = function () {
-                audioLetter.onended = null;
+            audioLetter.onended = () => {
+                $scope.enabled = true;
+                $scope.$apply();
             };
+
             audioLetter.play();
         };
 
-        $scope.currentNoun = function () {
-            $scope.enableTimer();
-            const currentLetter = $scope.letters[$scope.index];
+        $scope.playCurrentNoun = function () {
+            console.log('Play Current Noun');
+            $scope.enabled = false;
+            const currentLetter = $scope.getCurrentLetter();
             const audioNoun = $scope.letterMap[currentLetter].noun;
+            audioNoun.onended = () => {
+                $scope.enabled = true;
+                $scope.$apply();
+            };
             audioNoun.play();
         };
 
         $scope.playPair = function (letter) {
-            $scope.enableTimer();
+            $scope.enabled = false;
+            console.log('Pair');
             const audioLetter1 = $scope.letterMap[letter].letter;
             const audioNoun1 = $scope.letterMap[letter].noun;
+            audioNoun1.onended = () => {
+                $scope.enabled = true;
+                $scope.$apply();
+            };
 
             audioLetter1.onended = function () {
                 audioNoun1.play();
