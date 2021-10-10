@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import '../style/app.css';
 
@@ -14,6 +15,71 @@ const MODULE_NAME = 'app';
 angular.module(MODULE_NAME, [])
     .directive('app', app)
     .controller('RenderCtrl', ($scope) => {
+        $scope.audioCtx = null;
+        $scope.pathMap = {};
+        $scope.init = false;
+
+        $scope.getLetterAudioPath = function (letter) {
+            return `data/audio/letters/${letter}.mp3`;
+        };
+
+        $scope.getNounAudioPath = function (letter) {
+            return `data/audio/nouns/${letter}.mp3`;
+        };
+
+        $scope.initPathMap = function() {
+            $scope.letters.forEach(element => {
+                $scope.pathMap[element] = $scope.getLetterAudioPath(element);
+                $scope.pathMap[`${element}-noun`] = $scope.getNounAudioPath(element);
+            });
+        };
+
+        $scope.initContext = function() {
+            if (!$scope.audioCtx) {
+                console.log('Init AC.');
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                $scope.audioCtx = new AudioContext();
+            }
+            $scope.audioCtx.resume();
+        };
+
+        $scope.playBufferImpl = function (buffer, keyNext) {
+            const source = $scope.audioCtx.createBufferSource();
+            source.buffer = buffer;
+            if (keyNext) {
+                source.onended = function() {
+                    $scope.playBuffer(keyNext);
+                };
+            }
+
+            source.connect($scope.audioCtx.destination);
+            source.start();
+        };
+
+        $scope.kick = function() {
+            console.log('Kick!');
+            const kick = new Audio('data/audio/blank-t2.mp3');
+            kick.onended = function() {
+                $scope.init = true;
+                $scope.$apply();
+                kick.onended = null;
+                kick.play();
+            };
+            kick.play();
+
+
+        };
+        $scope.playBuffer = function(key1, key2) {
+            console.log('Play buffer');
+            $scope.initContext();
+            window.fetch($scope.pathMap[key1])
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => $scope.audioCtx.decodeAudioData(arrayBuffer))
+                .then(audioBuffer => {
+                    $scope.playBufferImpl(audioBuffer, key2);
+                });
+        };
+
         $scope.enabled = true;
         $scope.letters = [
             'A',
@@ -44,46 +110,7 @@ angular.module(MODULE_NAME, [])
             'Z'
         ];
 
-        $scope.getLetterAudio = function (letter) {
-            console.log(`Prefetch GET Letter: ${letter}`);
-            return new Audio(`data/audio/letters/${letter}.mp3`);
-        };
-
-        $scope.getNounAudio = function (letter) {
-            console.log(`Prefetch GET Noun: ${letter}`);
-            return new Audio(`data/audio/nouns/${letter}${letter}.mp3`);
-        };
-
-        $scope.letterMap = {
-            'A': { letter: $scope.getLetterAudio('A'), noun: $scope.getNounAudio('A') },
-            'B': { letter: $scope.getLetterAudio('B'), noun: $scope.getNounAudio('B') },
-            'C': { letter: $scope.getLetterAudio('C'), noun: $scope.getNounAudio('C') },
-            'D': { letter: $scope.getLetterAudio('D'), noun: $scope.getNounAudio('D') },
-            'E': { letter: $scope.getLetterAudio('E'), noun: $scope.getNounAudio('E') },
-            'F': { letter: $scope.getLetterAudio('F'), noun: $scope.getNounAudio('F') },
-            'G': { letter: $scope.getLetterAudio('G'), noun: $scope.getNounAudio('G') },
-            'H': { letter: $scope.getLetterAudio('H'), noun: $scope.getNounAudio('H') },
-            'I': { letter: $scope.getLetterAudio('I'), noun: $scope.getNounAudio('I') },
-            'J': { letter: $scope.getLetterAudio('J'), noun: $scope.getNounAudio('J') },
-            'K': { letter: $scope.getLetterAudio('K'), noun: $scope.getNounAudio('K') },
-            'L': { letter: $scope.getLetterAudio('L'), noun: $scope.getNounAudio('L') },
-            'M': { letter: $scope.getLetterAudio('M'), noun: $scope.getNounAudio('M') },
-            'N': { letter: $scope.getLetterAudio('N'), noun: $scope.getNounAudio('N') },
-            'O': { letter: $scope.getLetterAudio('O'), noun: $scope.getNounAudio('O') },
-            'P': { letter: $scope.getLetterAudio('P'), noun: $scope.getNounAudio('P') },
-            'Q': { letter: $scope.getLetterAudio('Q'), noun: $scope.getNounAudio('Q') },
-            'R': { letter: $scope.getLetterAudio('R'), noun: $scope.getNounAudio('R') },
-            'S': { letter: $scope.getLetterAudio('S'), noun: $scope.getNounAudio('S') },
-            'T': { letter: $scope.getLetterAudio('T'), noun: $scope.getNounAudio('T') },
-            'U': { letter: $scope.getLetterAudio('U'), noun: $scope.getNounAudio('U') },
-            'V': { letter: $scope.getLetterAudio('V'), noun: $scope.getNounAudio('V') },
-            'W': { letter: $scope.getLetterAudio('W'), noun: $scope.getNounAudio('W') },
-            'X': { letter: $scope.getLetterAudio('X'), noun: $scope.getNounAudio('X') },
-            'Y': { letter: $scope.getLetterAudio('Y'), noun: $scope.getNounAudio('Y') },
-            'Z': { letter: $scope.getLetterAudio('Z'), noun: $scope.getNounAudio('Z') },
-
-        };
-
+        $scope.initPathMap();
 
         $scope.index = 0;
 
@@ -102,6 +129,7 @@ angular.module(MODULE_NAME, [])
                 $scope.index++;
             }
             $scope.playPair($scope.getCurrentLetter());
+
         };
 
         $scope.reverse = function () {
@@ -117,50 +145,21 @@ angular.module(MODULE_NAME, [])
         };
 
         $scope.playCurrent = function () {
-            console.log('Play Current Pair');
-            $scope.playPair($scope.getCurrentLetter());
+            $scope.playPair($scope.getCurrentLetter(), `${$scope.getCurrentLetter()}-noun`);
+
         };
 
         $scope.playCurrentLetter = function () {
-            console.log('Play Current Letter');
-            $scope.enabled = false;
-            const currentLetter = $scope.getCurrentLetter();
-            const audioLetter = $scope.letterMap[currentLetter].letter;
-            audioLetter.onended = () => {
-                $scope.enabled = true;
-                $scope.$apply();
-            };
-
-            audioLetter.play();
+            $scope.playBuffer($scope.getCurrentLetter());
         };
 
         $scope.playCurrentNoun = function () {
-            console.log('Play Current Noun');
-            $scope.enabled = false;
-            const currentLetter = $scope.getCurrentLetter();
-            const audioNoun = $scope.letterMap[currentLetter].noun;
-            audioNoun.onended = () => {
-                $scope.enabled = true;
-                $scope.$apply();
-            };
-            audioNoun.play();
+            $scope.playBuffer(`${$scope.getCurrentLetter()}-noun`);
+
         };
 
         $scope.playPair = function (letter) {
-            $scope.enabled = false;
-            console.log('Pair');
-            const audioLetter1 = $scope.letterMap[letter].letter;
-            const audioNoun1 = $scope.letterMap[letter].noun;
-            audioNoun1.onended = () => {
-                $scope.enabled = true;
-                $scope.$apply();
-            };
-
-            audioLetter1.onended = function () {
-                audioNoun1.play();
-                audioLetter1.onended = null;
-            };
-            audioLetter1.play();
+            $scope.playBuffer(letter, `${letter}-noun`);
         };
 
     });

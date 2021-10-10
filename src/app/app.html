@@ -1,23 +1,24 @@
 <main class="App">
   <h1>ABCs with Ashna!</h1>
-  <p>Click images or buttons to hear letters and words.</p>
   <div ng-app="app">
 
     <body ng-controller="RenderCtrl">
-
+      <button class = "btn btn-secondary" ng-click="kick()">Get started here!</button>
       <div class="Display">
-        <img title="Click for letter" width="200" ng-disabled="!enabled" ng-click="playCurrentLetter()"
+        <img ng-disabled="!init" title="Click for letter" width="200" ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
-        <img title="Click for word" width="200" ng-disabled="!enabled" ng-click="playCurrentNoun()"
+      </div>
+      <div class="Display">
+        <img ng-disabled="!init" title="Click for word" width="200"  ng-click="playCurrentNoun()"
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
-        <button title="Reverse" class="btn btn-light" ng-disabled="!enabled" ng-click="reverse()"> <img alt="Reverse"
-            width="50" ng-src="data/images/left-arrow.svg" /></button>
-        <button title="Current" class="btn btn-light" ng-disabled="!enabled" ng-click="playCurrent()"> <img alt="Forward"
-            width="50" ng-src="data/images/question.svg" /></button>
-        <button title="Forward" class="btn btn-light" ng-disabled="!enabled" ng-click="forward()"> <img alt="Current"
-            width="50" ng-src="data/images/right-arrow.svg" /></button>
+        <button ng-disabled="!init" title="Reverse" class="btn btn-light"  ng-click="reverse()"> <img alt="Reverse"
+            width="40" ng-src="data/images/left-arrow.svg" /></button>
+        <button ng-disabled="!init"  title="Current" class="btn btn-light"  ng-click="playCurrent()"> <img alt="Forward"
+            width="40" ng-src="data/images/question.svg" /></button>
+        <button ng-disabled="!init"  title="Forward" class="btn btn-light" ng-click="forward()"> <img alt="Current"
+            width="40" ng-src="data/images/right-arrow.svg" /></button>
       </div>
 
       <!-- Prefetching-->
@@ -31,6 +32,7 @@
     <summary>&#9432;</summary>
     ABC Speak, Copyright Steven Mycynek 2021
     <br />
+    <span>Click images and buttons to hear letters and words</span> <br/>
     <a href="https://github.com/smycynek/abc-speak">github.com/smycynek/abc-speak</a>
   </details>
 
