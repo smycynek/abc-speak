@@ -3,7 +3,7 @@
   <div ng-app="app">
 
     <body ng-controller="RenderCtrl">
-      <button class = "btn btn-secondary" ng-click="kick()">Get started here!</button>
+      <button ng-show="!init" width="200" class = "btn btn-primary" ng-click="kick()">Get started!</button>
       <div class="Display">
         <img ng-disabled="!init" title="Click for letter" width="200" ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
@@ -13,11 +13,11 @@
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
-        <button ng-disabled="!init" title="Reverse" class="btn btn-light"  ng-click="reverse()"> <img alt="Reverse"
+        <button ng-show="init" title="Reverse" class="btn btn-light"  ng-click="reverse()"> <img alt="Reverse"
             width="40" ng-src="data/images/left-arrow.svg" /></button>
-        <button ng-disabled="!init"  title="Current" class="btn btn-light"  ng-click="playCurrent()"> <img alt="Forward"
+        <button ng-show="init"   title="Current" class="btn btn-light"  ng-click="playCurrent()"> <img alt="Forward"
             width="40" ng-src="data/images/question.svg" /></button>
-        <button ng-disabled="!init"  title="Forward" class="btn btn-light" ng-click="forward()"> <img alt="Current"
+        <button ng-show="init" title="Forward" class="btn btn-light" ng-click="forward()"> <img alt="Current"
             width="40" ng-src="data/images/right-arrow.svg" /></button>
       </div>
 
@@ -28,7 +28,7 @@
       </div>
     </body>
   </div>
-  <details class="About">
+  <details ng-show="init" class="About">
     <summary>&#9432;</summary>
     ABC Speak, Copyright Steven Mycynek 2021
     <br />

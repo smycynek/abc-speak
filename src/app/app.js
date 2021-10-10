@@ -63,7 +63,7 @@ angular.module(MODULE_NAME, [])
                 $scope.init = true;
                 $scope.$apply();
                 kick.onended = null;
-                kick.play();
+                //kick.play();
             };
             kick.play();
 
