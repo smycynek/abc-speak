@@ -37,16 +37,41 @@ button {
 
 .About {
   margin: .25em;
+}
+
+.Alphabet {
+  margin: 0.125em;
   font-size: small;
 }
+
+.AlphaChar:active {
+  font-weight: bolder;
+}
+
+.AlphaChar:hover {
+  font-weight: bolder;
+}
+.AlphaChar:focus {
+  font-weight: bolder;
+}
+
 
 details {
   margin: 0.0;
   padding: 0.0;
+  text-align: left;
+  align-content: left;
+  align-items: left;
+  align-items: left;
+  font-size: x-small;
+
 }
 details > summary {
   list-style: none;
+  font-size:medium;
 }
+
+
 
 details summary::-webkit-details-marker {
   display:none;

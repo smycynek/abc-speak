@@ -132,6 +132,11 @@ angular.module(MODULE_NAME, [])
 
         };
 
+        $scope.setCurrent = function(letter) {
+            $scope.index = $scope.letters.findIndex(item => item === letter);
+            $scope.playPair($scope.getCurrentLetter());
+        };
+
         $scope.reverse = function () {
             console.log('Reverse');
             if ($scope.index === 0) {

@@ -3,42 +3,71 @@
   <div ng-app="app">
 
     <body ng-controller="RenderCtrl">
-      <button ng-show="!init" width="200" class = "btn btn-primary" ng-click="kick()">Get started!</button>
+      <button ng-show="!init" width="200" class="btn btn-primary" ng-click="kick()">Get started!</button>
       <div class="Display">
         <img ng-disabled="!init" title="Click for letter" width="200" ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
       </div>
       <div class="Display">
-        <img ng-disabled="!init" title="Click for word" width="200"  ng-click="playCurrentNoun()"
+        <img ng-disabled="!init" title="Click for word" width="200" ng-click="playCurrentNoun()"
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
-        <button ng-show="init" title="Reverse" class="btn btn-light"  ng-click="reverse()"> <img alt="Reverse"
-            width="40" ng-src="data/images/left-arrow.svg" /></button>
-        <button ng-show="init"   title="Current" class="btn btn-light"  ng-click="playCurrent()"> <img alt="Forward"
+        <button ng-show="init" title="Reverse" class="btn btn-light" ng-click="reverse()"> <img alt="Reverse" width="40"
+            ng-src="data/images/left-arrow.svg" /></button>
+        <button ng-show="init" title="Current" class="btn btn-light" ng-click="playCurrent()"> <img alt="Forward"
             width="40" ng-src="data/images/question.svg" /></button>
-        <button ng-show="init" title="Forward" class="btn btn-light" ng-click="forward()"> <img alt="Current"
-            width="40" ng-src="data/images/right-arrow.svg" /></button>
+        <button ng-show="init" title="Forward" class="btn btn-light" ng-click="forward()"> <img alt="Current" width="40"
+            ng-src="data/images/right-arrow.svg" /></button>
       </div>
+
+      <div ng-show="init" class="Alphabet">
+        <span class="AlphaChar" ng-click="setCurrent('A')">A</span>
+        <span class="AlphaChar" ng-click="setCurrent('B')">B</span>
+        <span class="AlphaChar" ng-click="setCurrent('C')">C</span>
+        <span class="AlphaChar" ng-click="setCurrent('D')">D</span>
+        <span class="AlphaChar" ng-click="setCurrent('E')">E</span>
+        <span class="AlphaChar" ng-click="setCurrent('F')">F</span>
+        <span class="AlphaChar" ng-click="setCurrent('G')">G</span>
+        <span class="AlphaChar" ng-click="setCurrent('H')">H</span>
+        <span class="AlphaChar" ng-click="setCurrent('I')">I</span>
+        <span class="AlphaChar" ng-click="setCurrent('J')">J</span>
+        <span class="AlphaChar" ng-click="setCurrent('K')">K</span>
+        <span class="AlphaChar" ng-click="setCurrent('L')">L</span>
+        <span class="AlphaChar" ng-click="setCurrent('M')">M</span>
+        <span class="AlphaChar" ng-click="setCurrent('N')">N</span>
+        <span class="AlphaChar" ng-click="setCurrent('O')">O</span>
+        <span class="AlphaChar" ng-click="setCurrent('P')">P</span>
+        <span class="AlphaChar" ng-click="setCurrent('Q')">Q</span>
+        <span class="AlphaChar" ng-click="setCurrent('R')">R</span>
+        <span class="AlphaChar" ng-click="setCurrent('S')">S</span>
+        <span class="AlphaChar" ng-click="setCurrent('T')">T</span>
+        <span class="AlphaChar" ng-click="setCurrent('U')">U</span>
+        <span class="AlphaChar" ng-click="setCurrent('V')">V</span>
+        <span class="AlphaChar" ng-click="setCurrent('W')">W</span>
+        <span class="AlphaChar" ng-click="setCurrent('X')">X</span>
+        <span class="AlphaChar" ng-click="setCurrent('Y')">Y</span>
+        <span class="AlphaChar" ng-click="setCurrent('Z')">Z</span>
+      </div>
+
+      <details ng-show="init" class="About">
+        <summary> &#9432; </summary>
+
+        <span>ABC Speak, Copyright Steven Mycynek 2021</span> <br />
+        <a href="https://github.com/smycynek/abc-speak">github.com/smycynek/abc-speak</a> <br />
+        <span>Icons and photos by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and
+          <a href="https://www.shutterstock.com">shutterstock.com</a></span>
+      </details>
 
       <!-- Prefetching-->
       <div ng-show=false>
         <img ng-repeat="letter in letters" ng-src=data/images/nouns/{{letter}}.jpeg>
         <img ng-repeat="letter in letters" ng-src=data/images/letters/{{letter}}.jpeg>
       </div>
+
     </body>
   </div>
-  <details ng-show="init" class="About">
-    <summary>&#9432;</summary>
-    ABC Speak, Copyright Steven Mycynek 2021
-    <br />
-    <span>Click images and buttons to hear letters and words</span> <br/>
-    <a href="https://github.com/smycynek/abc-speak">github.com/smycynek/abc-speak</a> <br/>
-    <span>Icons and photos by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and
-    <a href="https://www.shutterstock.com">shutterstock.com</a></span>
-
-  </details>
-
 
 
 </main>
