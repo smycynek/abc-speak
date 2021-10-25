@@ -18,7 +18,6 @@ angular.module(MODULE_NAME, [])
         $scope.audioCtx = null;
         $scope.pathMap = {};
         $scope.init = false;
-
         $scope.getLetterAudioPath = function (letter) {
             return `data/audio/letters/${letter}.mp3`;
         };
@@ -56,19 +55,41 @@ angular.module(MODULE_NAME, [])
             source.start();
         };
 
+        /*
         $scope.kick = function() {
             console.log('Kick!');
             const kick = new Audio('data/audio/blank-t2.mp3');
+
             kick.onended = function() {
                 $scope.init = true;
                 $scope.$apply();
-                kick.onended = null;
-                //kick.play();
-            };
-            kick.play();
 
+            };
+            kick.play().then(() => $scope.playCurrent());
 
         };
+*/
+        $scope.kick = function () {
+            $scope.initContext();
+            window.fetch('data/audio/blank-t2.mp3')
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => $scope.audioCtx.decodeAudioData(arrayBuffer))
+                .then(audioBuffer => {
+
+
+                    const source = $scope.audioCtx.createBufferSource();
+                    source.buffer = audioBuffer;
+                    source.onended = function () {
+                        $scope.playCurrent();
+                        $scope.init = true;
+                        $scope.$apply();
+                    };
+                    source.connect($scope.audioCtx.destination);
+                    source.start();
+
+                });
+        };
+
         $scope.playBuffer = function(key1, key2) {
             console.log('Play buffer');
             $scope.initContext();

@@ -75,3 +75,11 @@ details > summary {
 details summary::-webkit-details-marker {
   display:none;
 }
+
+.current {
+  font-size: x-large;
+}
+
+.dimmed {
+  filter: brightness(75%);
+}
