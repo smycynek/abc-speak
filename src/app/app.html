@@ -5,9 +5,10 @@
     <body ng-controller="RenderCtrl">
       <button ng-show="!init" width="200" class="btn btn-primary" ng-click="kick()">Get started!</button>
       <div class="Display">
-        <img ng-disabled="!init" title="Click for letter" width="170" ng-click="playCurrentLetter()"
+        <img ng-disabled="!init" title="Click for letter" width="45%"  ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
-        <img ng-disabled="!init" title="Click for word" width="170" ng-click="playCurrentNoun()"
+
+        <img ng-disabled="!init" title="Click for word" width="45%" ng-click="playCurrentNoun()"
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
