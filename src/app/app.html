@@ -5,11 +5,9 @@
     <body ng-controller="RenderCtrl">
       <button ng-show="!init" width="200" class="btn btn-primary" ng-click="kick()">Get started!</button>
       <div class="Display">
-        <img ng-disabled="!init" title="Click for letter" width="200" ng-click="playCurrentLetter()"
+        <img ng-disabled="!init" title="Click for letter" width="170" ng-click="playCurrentLetter()"
           ng-src="data/images/letters/{{letters[index]}}.jpeg" />
-      </div>
-      <div class="Display">
-        <img ng-disabled="!init" title="Click for word" width="200" ng-click="playCurrentNoun()"
+        <img ng-disabled="!init" title="Click for word" width="170" ng-click="playCurrentNoun()"
           ng-src="data/images/nouns/{{letters[index]}}.jpeg" />
       </div>
       <div>
@@ -56,8 +54,9 @@
         <span>ABC Speak, Copyright Steven Mycynek 2021</span> <br />
         <a href="https://github.com/smycynek/abc-speak">github.com/smycynek/abc-speak</a> <br />
         <span>Icons and photos by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
-            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and
-          <a href="https://www.shutterstock.com">shutterstock.com</a></span>
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></span> <br />
+          <span>Animal drawing outlines by Aditi Inamdar, 2021</span>
+
       </details>
 
       <!-- Prefetching-->
