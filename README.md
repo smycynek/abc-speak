@@ -1,6 +1,6 @@
 # ABC Speak
 
-Copyright 2021 Steven Mycynek
+Copyright 2021-2026 Steven Mycynek
 
 ## Basics
 
@@ -17,12 +17,14 @@ Icons by <https://www.freepik.com> from <https://www.flaticon.com>
 
 ## Usage
 
-```npm run build```
+Built with Angular 22 (`@angular/cli`) and `bun`.
 
-
-```npm run server```
-http://localhost:8081/abcspeak
+- `bun install`
+- `bun run server` for a development server: <http://localhost:4200>
+- `bun run build` builds for production with `--base-href /abc-speak/`, output in `dist/abc-speak/browser`
+- `bun run lint` / `bun run pretty`
+- `./deploy.sh prod` (or `bun run deploy`) builds and copies the app to stevenvictor.net; requires `sitevars.sh` with `SITE`, `APP`, and `FOLDER`
 
 ## Live demo
 
-<https://stevenvictor.net/abcspeak>
+<https://stevenvictor.net/abc-speak>

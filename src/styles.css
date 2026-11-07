@@ -1,41 +1,38 @@
-/* styles in src/style directory are applied to the whole page */
+/* global styles, applied to the whole page */
 
 .Display {
   margin: 0.125em;
 }
 
-.App
-{
+.App {
   margin: 0.125em;
   text-align: center;
   align-content: center;
-  align-items: center;
   align-items: center;
 }
 
 h1 {
   margin: 0;
-  padding:0;
+  padding: 0;
 }
-
 
 p {
   margin: 0;
-  padding:0;
+  padding: 0;
 }
 
 img {
   margin: 0;
-  padding:0;
+  padding: 0;
 }
 
 button {
   margin: 0.125em;
-  padding:0.0;
+  padding: 0;
 }
 
 .About {
-  margin: .25em;
+  margin: 0.25em;
 }
 
 .Alphabet {
@@ -50,30 +47,27 @@ button {
 .AlphaChar:hover {
   font-weight: bolder;
 }
+
 .AlphaChar:focus {
   font-weight: bolder;
 }
 
-
 details {
-  margin: 0.0;
-  padding: 0.0;
+  margin: 0;
+  padding: 0;
   text-align: left;
   align-content: left;
   align-items: left;
-  align-items: left;
   font-size: x-small;
-
 }
+
 details > summary {
   list-style: none;
-  font-size:medium;
+  font-size: medium;
 }
 
-
-
 details summary::-webkit-details-marker {
-  display:none;
+  display: none;
 }
 
 .current {

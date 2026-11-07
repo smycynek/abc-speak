@@ -1,62 +1,53 @@
 {
-  "name": "abcSpeak",
+  "name": "abc-speak",
   "version": "0.0.1",
   "description": "abcSpeak",
   "scripts": {
-    "build": "webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
-    "test": "karma start",
-    "test-watch": "karma start --auto-watch --no-single-run",
-    "start": "npm run server"
+    "ng": "ng",
+    "start": "ng serve",
+    "server": "ng serve",
+    "build": "ng build --base-href /abc-speak/",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "pretty": "prettier --write \"./**/*.{ts,html,css}\"",
+    "deploy": "./deploy.sh prod"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smycynek/abcspeak"
+    "url": "https://github.com/smycynek/abc-speak"
   },
   "author": "Steven Mycynek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/smycynek/abcspeak"
+    "url": "https://github.com/smycynek/abc-speak"
   },
-  "homepage": "https://stevenvictor.net/abcspeak",
+  "homepage": "https://stevenvictor.net/abc-speak",
+  "private": true,
   "dependencies": {
-    "angular": "^1.7.0",
-    "bootstrap": "^5.0.0",
-    "uuid": "^8.3.2"
+    "@angular/common": "^22.2.5",
+    "@angular/compiler": "^22.2.5",
+    "@angular/core": "^22.2.5",
+    "@angular/forms": "^22.2.5",
+    "@angular/platform-browser": "^22.2.5",
+    "@angular/router": "^22.2.5",
+    "bootstrap": "^5.3.8",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "prettier-eslint": "^17.1.2",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.9.1"
   },
   "devDependencies": {
-    "ajv": "^6.4.0",
-    "angular-mocks": "^1.7.0",
-    "autoprefixer": "^8.4.1",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-es2015": "^6.1.18",
-    "clean-webpack-plugin": "^2.0.2",
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
-    "eslint": "^7.26.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.2",
-    "eslint-plugin-jasmine": "^4.1.2",
-    "extract-text-webpack-plugin": "2.0.0-beta.5",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
-    "istanbul-instrumenter-loader": "^3.0.1",
-    "jasmine-core": "^3.1.0",
-    "karma": "^2.0.2",
-    "karma-coverage": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "^0.0.32",
-    "karma-webpack": "^3.0.0",
-    "node-libs-browser": "^2.1.0",
-    "null-loader": "^0.1.1",
-    "phantomjs-prebuilt": "^2.1.4",
-    "postcss-loader": "^2.1.5",
-    "raw-loader": "^0.5.1",
-    "style-loader": "^0.21.0",
-    "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.11.2"
+    "@angular/build": "^22.2.6",
+    "@angular/cli": "^22.2.6",
+    "@angular/compiler-cli": "^22.2.5",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "^22.6.0",
+    "eslint": "^10.14.0",
+    "jsdom": "^31.0.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.0.0"
   }
 }
