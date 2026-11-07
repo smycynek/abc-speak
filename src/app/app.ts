@@ -1,4 +1,5 @@
 import { Component, computed, signal, ChangeDetectionStrategy } from '@angular/core';
+import { version } from './version';
 
 const LETTERS = [
   'A',
@@ -39,8 +40,8 @@ const LETTERS = [
 export class App {
   protected readonly letters = LETTERS;
   protected readonly index = signal(0);
-  protected readonly init = signal(false);
   protected readonly currentLetter = computed(() => this.letters[this.index()]);
+  protected readonly version = version;
 
   private audioCtx: AudioContext | null = null;
   private readonly pathMap: Record<string, string> = {};
@@ -75,24 +76,6 @@ export class App {
     }
     source.connect(this.audioCtx!.destination);
     source.start();
-  }
-
-  protected kick(): void {
-    this.initContext();
-    window
-      .fetch('data/audio/blank-t2.mp3')
-      .then((response) => response.arrayBuffer())
-      .then((arrayBuffer) => this.audioCtx!.decodeAudioData(arrayBuffer))
-      .then((audioBuffer) => {
-        const source = this.audioCtx!.createBufferSource();
-        source.buffer = audioBuffer;
-        source.onended = () => {
-          this.playCurrent();
-          this.init.set(true);
-        };
-        source.connect(this.audioCtx!.destination);
-        source.start();
-      });
   }
 
   protected playBuffer(key1: string, key2?: string): void {

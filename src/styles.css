@@ -77,3 +77,7 @@ details summary::-webkit-details-marker {
 .dimmed {
   filter: brightness(75%);
 }
+
+.DisplayImg {
+  width: 36%;
+}

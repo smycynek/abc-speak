@@ -1,33 +1,26 @@
 <main class="App">
   <h1>ABCs with Ashna!</h1>
 
-  @if (!init()) {
-  <button width="200" class="btn btn-primary" (click)="kick()">Get started!</button>
-  } @if (init()) {
   <span>Click any image, letter, or button</span>
-  }
 
   <div class="Display">
     <img
-      [class.dimmed]="!init()"
+      class="DisplayImg"
       title="Click for letter"
-      width="45%"
       (click)="playCurrentLetter()"
       [alt]="'Letter ' + currentLetter()"
       [src]="'data/images/letters/' + currentLetter() + '.jpeg'"
     />
 
     <img
-      [class.dimmed]="!init()"
+      class="DisplayImg"
       title="Click for word"
-      width="45%"
       (click)="playCurrentNoun()"
       [alt]="'Word starting with ' + currentLetter()"
       [src]="'data/images/nouns/' + currentLetter() + '.jpeg'"
     />
   </div>
 
-  @if (init()) {
   <div>
     <button title="Reverse" class="btn btn-light" (click)="reverse()">
       <img alt="Reverse" width="40" src="data/images/left-arrow.svg" />
@@ -45,11 +38,10 @@
     <span class="AlphaChar" (click)="setCurrent(letter)">{{ letter }}</span>
     }
   </div>
-  }
 
   <details class="About">
     <summary>&#9432;</summary>
-    <span>ABC Speak, Copyright Steven Mycynek 2021</span><br />
+    <span>ABC Speak, Copyright Steven Mycynek 2021 v{{ version }}</span><br />
     <span>Recordings, coloring, and printing from my daughter, Ashna</span><br />
     <span
       >Animal drawing outlines, used with permission, by Aditi Inamdar,
