@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, ChangeDetectionStrategy } from '@angular/core';
 
 const LETTERS = [
   'A',
@@ -33,6 +33,7 @@ const LETTERS = [
   selector: 'app-root',
   imports: [],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.css',
 })
 export class App {
