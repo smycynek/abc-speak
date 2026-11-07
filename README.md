@@ -1,6 +1,6 @@
 # ABC Speak
 
-Copyright 2021 Steven Mycynek
+Copyright 2021-2026 Steven Mycynek
 
 ## Basics
 
@@ -17,7 +17,7 @@ Icons by <https://www.freepik.com> from <https://www.flaticon.com>
 
 ## Usage
 
-Built with Angular 20 (`@angular/cli`) and `bun`.
+Built with Angular 22 (`@angular/cli`) and `bun`.
 
 - `bun install`
 - `bun run server` for a development server: <http://localhost:4200>
