@@ -1,8 +1,32 @@
 import { Component, computed, signal } from '@angular/core';
 
 const LETTERS = [
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
 ] as const;
 
 @Component({
@@ -54,7 +78,8 @@ export class App {
 
   protected kick(): void {
     this.initContext();
-    window.fetch('data/audio/blank-t2.mp3')
+    window
+      .fetch('data/audio/blank-t2.mp3')
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) => this.audioCtx!.decodeAudioData(arrayBuffer))
       .then((audioBuffer) => {
@@ -71,7 +96,8 @@ export class App {
 
   protected playBuffer(key1: string, key2?: string): void {
     this.initContext();
-    window.fetch(this.pathMap[key1])
+    window
+      .fetch(this.pathMap[key1])
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) => this.audioCtx!.decodeAudioData(arrayBuffer))
       .then((audioBuffer) => this.playBufferImpl(audioBuffer, key2));

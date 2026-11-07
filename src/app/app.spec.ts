@@ -23,7 +23,10 @@ describe('App', () => {
 
   it('should start on letter A and step forward through the alphabet', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance as unknown as { currentLetter: () => string; forward: () => void };
+    const app = fixture.componentInstance as unknown as {
+      currentLetter: () => string;
+      forward: () => void;
+    };
     expect(app.currentLetter()).toBe('A');
     app.forward();
     expect(app.currentLetter()).toBe('B');

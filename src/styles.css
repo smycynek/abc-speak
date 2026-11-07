@@ -28,11 +28,11 @@ img {
 
 button {
   margin: 0.125em;
-  padding: 0.0;
+  padding: 0;
 }
 
 .About {
-  margin: .25em;
+  margin: 0.25em;
 }
 
 .Alphabet {
@@ -53,15 +53,15 @@ button {
 }
 
 details {
-  margin: 0.0;
-  padding: 0.0;
+  margin: 0;
+  padding: 0;
   text-align: left;
   align-content: left;
   align-items: left;
   font-size: x-small;
 }
 
-details>summary {
+details > summary {
   list-style: none;
   font-size: medium;
 }
