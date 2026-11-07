@@ -28,3 +28,5 @@ Built with Angular 22 (`@angular/cli`) and `bun`.
 ## Live demo
 
 <https://stevenvictor.net/abc-speak>
+
+version: 000103

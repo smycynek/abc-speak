@@ -37,7 +37,7 @@ if [ -z "$FOLDER" ]; then
     exit 4
 fi
 
-tools=("zip" "scp" "ssh" "bun")
+tools=("zip" "scp" "ssh" "bun" "sed")
 
 for tool in "${tools[@]}"; do
     if ! which "$tool" >/dev/null; then
@@ -47,6 +47,19 @@ for tool in "${tools[@]}"; do
 done
 
 rm -rf dist # Remove old build
+
+# Bump version
+README_PATH="./README.md"
+VERSION_PATH="./src/app/version.ts"
+version=$(grep -o -m 1 "[0-9][0-9][0-9]" "$VERSION_PATH")
+echo "$version"
+version_inc=$((version + 1))
+echo "$version_inc"
+sed -i -e "s/[0-9][0-9][0-9]/$version_inc/g" "$VERSION_PATH"
+sed -i -e "s/000[0-9][0-9][0-9]/000$version_inc/g" "$README_PATH"
+
+rm "$VERSION_PATH-e"
+rm "$README_PATH-e"
 
 bun run ng build --configuration="$CONFIG" --base-href /"$APP"/
 
