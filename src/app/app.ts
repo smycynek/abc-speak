@@ -65,6 +65,13 @@ export class App {
     if (!this.audioCtx) {
       this.audioCtx = new AudioContext();
     }
+    // iOS Safari routes Web Audio output through the ringer channel by default,
+    // so it gets silenced by the hardware mute switch unless the session type
+    // is explicitly set to "playback" (supported since iOS 17).
+    const nav = navigator as Navigator & { audioSession?: { type: string } };
+    if (nav.audioSession) {
+      nav.audioSession.type = 'playback';
+    }
     this.audioCtx.resume();
   }
 

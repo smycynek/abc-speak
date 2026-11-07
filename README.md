@@ -29,4 +29,4 @@ Built with Angular 22 (`@angular/cli`) and `bun`.
 
 <https://stevenvictor.net/abc-speak>
 
-version: 000103
+version: 000104
