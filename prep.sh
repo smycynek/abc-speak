@@ -1,10 +1,9 @@
 #! /bin/bash
 
-rm abcspeak.zip
-rm -rf abcspeak
+rm -f abcspeak.zip
+rm -rf dist
 npm run build
-zip -r abcspeak.zip abcspeak
-cd src/public
-zip -r data.zip data
-mv data.zip ../../
-cd ../..
+cd dist/abc-speak/browser
+zip -r ../../../abcspeak.zip .
+cd ../../..
+zip -r data.zip public/data

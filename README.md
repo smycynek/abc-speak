@@ -17,11 +17,13 @@ Icons by <https://www.freepik.com> from <https://www.flaticon.com>
 
 ## Usage
 
-```npm run build```
-
+Built with Angular 20 (`@angular/cli`).
 
 ```npm run server```
-http://localhost:8081/abcspeak
+http://localhost:4200
+
+```npm run build```
+Builds for production with `--base-href /abcspeak/`, output in `dist/abc-speak/browser`.
 
 ## Live demo
 

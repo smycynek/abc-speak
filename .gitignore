@@ -12,6 +12,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 abcspeak.zip
 abcspeak/
 data.zip
+.angular/cache
 # Runtime data
 pids
 *.pid
