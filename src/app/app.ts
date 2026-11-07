@@ -1,4 +1,5 @@
 import { Component, computed, signal, ChangeDetectionStrategy } from '@angular/core';
+import { version } from './version';
 
 const LETTERS = [
   'A',
@@ -39,17 +40,23 @@ const LETTERS = [
 export class App {
   protected readonly letters = LETTERS;
   protected readonly index = signal(0);
-  protected readonly init = signal(false);
+  protected readonly ready = signal(false);
   protected readonly currentLetter = computed(() => this.letters[this.index()]);
+  protected readonly version = version;
 
-  private audioCtx: AudioContext | null = null;
+  private readonly audioCtx: AudioContext = new AudioContext();
   private readonly pathMap: Record<string, string> = {};
+  private readonly bufferMap: Record<string, AudioBuffer> = {};
 
   constructor() {
     this.letters.forEach((letter) => {
       this.pathMap[letter] = this.getLetterAudioPath(letter);
       this.pathMap[`${letter}-noun`] = this.getNounAudioPath(letter);
     });
+
+    Promise.all(Object.keys(this.pathMap).map((key) => this.preload(key))).then(() =>
+      this.ready.set(true),
+    );
   }
 
   private getLetterAudioPath(letter: string): string {
@@ -60,48 +67,35 @@ export class App {
     return `data/audio/nouns/${letter}.mp3`;
   }
 
-  private initContext(): void {
-    if (!this.audioCtx) {
-      this.audioCtx = new AudioContext();
-    }
-    this.audioCtx.resume();
+  // Decoding every clip up front, independent of any user gesture, lets
+  // playback below be fully synchronous with the click that triggers it.
+  // On iOS (Safari and Chrome, both on WebKit), starting a buffer source
+  // only unlocks audio when it happens in the same synchronous call stack
+  // as the gesture -- a fetch()/decodeAudioData() in between breaks that
+  // link and audio silently never plays.
+  private preload(key: string): Promise<void> {
+    return window
+      .fetch(this.pathMap[key])
+      .then((response) => response.arrayBuffer())
+      .then((arrayBuffer) => this.audioCtx.decodeAudioData(arrayBuffer))
+      .then((audioBuffer) => {
+        this.bufferMap[key] = audioBuffer;
+      });
   }
 
   private playBufferImpl(buffer: AudioBuffer, keyNext?: string): void {
-    const source = this.audioCtx!.createBufferSource();
+    const source = this.audioCtx.createBufferSource();
     source.buffer = buffer;
     if (keyNext) {
       source.onended = () => this.playBuffer(keyNext);
     }
-    source.connect(this.audioCtx!.destination);
+    source.connect(this.audioCtx.destination);
     source.start();
   }
 
-  protected kick(): void {
-    this.initContext();
-    window
-      .fetch('data/audio/blank-t2.mp3')
-      .then((response) => response.arrayBuffer())
-      .then((arrayBuffer) => this.audioCtx!.decodeAudioData(arrayBuffer))
-      .then((audioBuffer) => {
-        const source = this.audioCtx!.createBufferSource();
-        source.buffer = audioBuffer;
-        source.onended = () => {
-          this.playCurrent();
-          this.init.set(true);
-        };
-        source.connect(this.audioCtx!.destination);
-        source.start();
-      });
-  }
-
   protected playBuffer(key1: string, key2?: string): void {
-    this.initContext();
-    window
-      .fetch(this.pathMap[key1])
-      .then((response) => response.arrayBuffer())
-      .then((arrayBuffer) => this.audioCtx!.decodeAudioData(arrayBuffer))
-      .then((audioBuffer) => this.playBufferImpl(audioBuffer, key2));
+    this.audioCtx.resume();
+    this.playBufferImpl(this.bufferMap[key1], key2);
   }
 
   protected forward(): void {

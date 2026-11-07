@@ -48,6 +48,19 @@ done
 
 rm -rf dist # Remove old build
 
+# Bump version
+README_PATH="./README.md"
+VERSION_PATH="./src/app/version.ts"
+
+version=$(grep -o -m 1 "[0-9]\+" "$VERSION_PATH")
+version_inc=$((version + 1))
+echo "version: $version -> $version_inc"
+
+sed -i -e "s/version = $version/version = $version_inc/" "$VERSION_PATH"
+sed -i -e "s/version: $version/version: $version_inc/" "$README_PATH"
+
+rm -f "$VERSION_PATH-e" "$README_PATH-e"
+
 bun run ng build --configuration="$CONFIG" --base-href /"$APP"/
 
 # rename output folder to match the public URL path

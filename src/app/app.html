@@ -1,55 +1,50 @@
 <main class="App">
   <h1>ABCs with Ashna!</h1>
 
-  @if (!init()) {
-  <button width="200" class="btn btn-primary" (click)="kick()">Get started!</button>
-  } @if (init()) {
   <span>Click any image, letter, or button</span>
-  }
 
   <div class="Display">
     <img
-      [class.dimmed]="!init()"
+      [class.dimmed]="!ready()"
       title="Click for letter"
-      width="45%"
+      width="36.1%"
       (click)="playCurrentLetter()"
       [alt]="'Letter ' + currentLetter()"
       [src]="'data/images/letters/' + currentLetter() + '.jpeg'"
     />
 
     <img
-      [class.dimmed]="!init()"
+      [class.dimmed]="!ready()"
       title="Click for word"
-      width="45%"
+      width="36.1%"
       (click)="playCurrentNoun()"
       [alt]="'Word starting with ' + currentLetter()"
       [src]="'data/images/nouns/' + currentLetter() + '.jpeg'"
     />
   </div>
 
-  @if (init()) {
   <div>
-    <button title="Reverse" class="btn btn-light" (click)="reverse()">
+    <button title="Reverse" class="btn btn-light" [disabled]="!ready()" (click)="reverse()">
       <img alt="Reverse" width="40" src="data/images/left-arrow.svg" />
     </button>
-    <button title="Current" class="btn btn-light" (click)="playCurrent()">
+    <button title="Current" class="btn btn-light" [disabled]="!ready()" (click)="playCurrent()">
       <span class="current">{{ currentLetter() }}</span>
     </button>
-    <button title="Forward" class="btn btn-light" (click)="forward()">
+    <button title="Forward" class="btn btn-light" [disabled]="!ready()" (click)="forward()">
       <img alt="Current" width="40" src="data/images/right-arrow.svg" />
     </button>
   </div>
 
   <div class="Alphabet">
     @for (letter of letters; track letter) {
-    <span class="AlphaChar" (click)="setCurrent(letter)">{{ letter }}</span>
+    <span class="AlphaChar" (click)="ready() && setCurrent(letter)">{{ letter }}</span>
     }
   </div>
-  }
 
   <details class="About">
     <summary>&#9432;</summary>
-    <span>ABC Speak, Copyright Steven Mycynek 2021</span><br />
+    <span>ABC Speak, Copyright Steven Mycynek 2021</span>
+    <span>&nbsp;v{{ version }}</span><br />
     <span>Recordings, coloring, and printing from my daughter, Ashna</span><br />
     <span
       >Animal drawing outlines, used with permission, by Aditi Inamdar,
